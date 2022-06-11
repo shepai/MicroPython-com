@@ -11,8 +11,8 @@ The board cannot be connected to any Micro-Python specific IDE through serial, o
 
 The library itself has an initializer for board.
 
-'B=Board(blackList=[],lookFor=””)'
+`B=Board(blackList=[],lookFor=””)`
 
 This gives the option to list the ports that are default and should be ignored. If you know exactly what port to connect to then use the lookFor parameter as a string with your wanted port. For example:
 
-'B=Board(lookFor=’COM9’)'
+`B=Board(lookFor=’COM9’)`
