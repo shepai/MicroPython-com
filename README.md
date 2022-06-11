@@ -1,7 +1,7 @@
 # MicroPython Serial configuration
 
 ## PORT CONFIGURATION
-There must be a port open with the speed 115200 open for the ESP32 and Python library to connect. This can be done using the PuTTY app which is available on Windows and Linux. This must be ran while the board is not attached.
+There must be a port open with the speed 115200 open for the ESP32 and Python library to connect. The board will typically automatically connect. A way of testing this is using the Board library with `B.serial_ports()` with the device unplugged, and then plugged in. This missing COM will reveal which the baord is on. If there are still problems, manual connection can be made with using the PuTTY app, which is available on Windows and Linux. This must be ran while the board is not attached.
 
 ![image of PuTTY](Assets/enable.png)
 
@@ -22,8 +22,18 @@ One you know which COM is the board you want the library can connect as follows:
 
 `B.connect('COM9')`
 
-The COM can be added as a string parameter.
+The COM can be added as a string parameter. If there is a connection error, try run again. Make sure the COM you are using is the COM for your ESP32 board.
 
-This gives the option to list the ports that are default and should be ignored. If you know exactly what port to connect to then use the lookFor parameter as a string with your wanted port. For example:
+To upload control code to the ESP32 use the run file method, that takes your local file as parameter and uploads it to the physical board. It is advised to use the demo code as the library is setup to work with that.
 
-`B=Board(lookFor=’COM9’)`
+`B.runFile(fileToRun="/path/to/file.py")`
+
+Once you are connected to the board, it is listening for commands from the PC library. For data retrieval you can make use of the record method that allows the user to either record for a given time interval or till a condition is met. It can only do one or the other at one time.
+
+Time interval:
+`B.record(time_interval=60,gather=15)`
+This will loop for 60 seconds and perform a pull request every 10 iterations. The pull request gathers all the data that the board has collected, since the last pull. Gather is by default 10.
+
+Conditional:
+`B.record(till=True)`
+This will loop till the board returns "END". This is something setup within the onboard code by the developer for their given experiment.

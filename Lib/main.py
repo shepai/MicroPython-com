@@ -107,7 +107,7 @@ class Board:
                     data=self.COM.exec('getData('+str(channels)+')').decode("utf-8").replace("\r\n","") #decode data
                     dic=eval(data) #convert to a dictionary of items
                     log.append(dic)
-        else:
+        elif till==True:
             #loop till
             #record until "end"
             seq="no"
@@ -125,7 +125,7 @@ class Board:
 
 
 
-
+"""
 b=Board()
 #print(b.serial_ports())
 b.connect('COM9')
@@ -137,7 +137,7 @@ b.record(time_interval=20,channels=[1,2,3,3,4])
 
 
 
-"""
+
 #speed reading test
 averages=[]
 for i in range(1,10):
