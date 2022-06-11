@@ -28,12 +28,12 @@ To upload control code to the ESP32 use the run file method, that takes your loc
 
 `B.runFile(fileToRun="/path/to/file.py")`
 
-Once you are connected to the board, it is listening for commands from the PC library. For data retrieval you can make use of the record method that allows the user to either record for a given time interval or till a condition is met. It can only do one or the other at one time.
+Once you are connected to the board, it is listening for commands from the PC library. For data retrieval you can make use of the record method that allows the user to either record for a given time interval or till a condition is met. It can only do one or the other at one time. Pulling data from the board takes more time than commanding the board to gather data from the sensors, therefore pulling is done at intervals denoted by parameter "gather".
 
 Time interval:
 `B.record(time_interval=60,gather=15)`
-This will loop for 60 seconds and perform a pull request every 10 iterations. The pull request gathers all the data that the board has collected, since the last pull. Gather is by default 10.
+This will loop for 60 seconds and perform a pull request every 15 iterations. The pull request gathers all the data that the board has collected, since the last pull. Gather is by default 10.
 
 Conditional:
 `B.record(till=True)`
-This will loop till the board returns "END". This is something setup within the onboard code by the developer for their given experiment.
+This will loop till the board returns "END" from a "getEnded()". This is something setup within the onboard code by the developer for their given experiment. The gathering will result to default 10, as it has not been stated in the parameters.
